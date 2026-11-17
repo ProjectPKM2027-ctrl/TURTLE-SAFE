@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TURTLE-SAFE | Ocean Conservation System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-icon">🐢</div>
+            <div class="brand-text">
+                <h2>TURTLE-SAFE</h2>
+                <span>OCEAN CONSERVATION</span>
+            </div>
+        </div>
+
+        <div class="sidebar-label">MAIN MENU</div>
+
+        <nav class="sidebar-menu">
+
+            <a href="#dashboard" class="menu-item active">
+                <span class="menu-icon">▦</span>
+                <span class="menu-text">Dashboard</span>
+            </a>
+
+            <a href="#peta-risiko" class="menu-item">
+                <span class="menu-icon">⌖</span>
+                <span class="menu-text">Peta Risiko Interaksi</span>
+            </a>
+
+            <a href="#data-penyu" class="menu-item">
+                <span class="menu-icon">🐢</span>
+                <span class="menu-text">Data Kemunculan Penyu</span>
+            </a>
+
+            <a href="#data-perikanan" class="menu-item">
+                <span class="menu-icon">♧</span>
+                <span class="menu-text">Data Aktivitas Perikanan</span>
+            </a>
+
+            <a href="#analisis" class="menu-item">
+                <span class="menu-icon">▥</span>
+                <span class="menu-text">Analisis Risiko</span>
+            </a>
+
+            <a href="#peringatan" class="menu-item">
+                <span class="menu-icon">♧</span>
+                <span class="menu-text">Informasi dan Peringatan Risiko</span>
+            </a>
+
+            <a href="#edukasi" class="menu-item">
+                <span class="menu-icon">▤</span>
+                <span class="menu-text">Edukasi Konservasi</span>
+            </a>
+
+            <a href="#tentang" class="menu-item">
+                <span class="menu-icon">ⓘ</span>
+                <span class="menu-text">Tentang dan Laporan</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="system-status">
+                <span class="status-dot"></span>
+                <span class="menu-text">System Online</span>
+            </div>
+            <p>© 2026 TURTLE-SAFE</p>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN AREA -->
+    <main class="main-area">
+
+        <!-- FLOATING NAVIGATION -->
+        <div class="floating-nav">
+
+            <button class="toggle-btn" id="toggleSidebar" aria-label="Toggle sidebar">
+                ☰
+            </button>
+
+            <div class="breadcrumb">
+                <span>Workspace</span>
+                <span>/</span>
+                <strong id="currentPage">Dashboard</strong>
+            </div>
+
+            <div class="nav-actions">
+
+                <label class="search-box">
+                    <span>⌕</span>
+                    <input type="search" placeholder="Cari informasi...">
+                </label>
+
+                <button class="nav-icon" aria-label="Notifikasi">♧</button>
+
+                <div class="profile">
+                    <div class="profile-avatar">TS</div>
+                    <div class="profile-info">
+                        <strong>Administrator</strong>
+                        <span>System User</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTENT -->
+        <div class="content-area">
+
+            <!-- HALAMAN 1: DASHBOARD -->
+            <section class="page-section active" id="page-dashboard">
+
+                <!-- WELCOME -->
+                <section class="welcome-section">
+                    <div>
+                        <span class="section-tag">OCEAN CONSERVATION SYSTEM</span>
+                        <h1>Welcome to TURTLE-SAFE</h1>
+                        <p>
+                            Sistem informasi pemetaan risiko interaksi
+                            penyu dengan aktivitas perikanan.
+                        </p>
+                    </div>
+
+                    <div class="welcome-decoration">🐢</div>
+                </section>
+
+
+                <!-- STATISTIK DASHBOARD -->
+                <section class="stats-grid">
+
+                    <a href="#data-penyu" class="stat-card dashboard-link">
+                        <div class="stat-icon">🐢</div>
+                        <span>Total Kemunculan Penyu</span>
+                        <h2>--</h2>
+                        <small>Menunggu input data</small>
+                        <small class="card-link">Lihat data →</small>
+                    </a>
+
+                    <a href="#data-perikanan" class="stat-card dashboard-link">
+                        <div class="stat-icon">⚓</div>
+                        <span>Aktivitas Perikanan</span>
+                        <h2>--</h2>
+                        <small>Menunggu input data</small>
+                        <small class="card-link">Lihat data →</small>
+                    </a>
+
+                    <a href="#peta-risiko" class="stat-card dashboard-link">
+                        <div class="stat-icon">⌖</div>
+                        <span>Lokasi Pengamatan</span>
+                        <h2>--</h2>
+                        <small>Menunggu input data</small>
+                        <small class="card-link">Lihat peta →</small>
+                    </a>
+
+                    <a href="#analisis" class="stat-card dashboard-link">
+                        <div class="stat-icon">◈</div>
+                        <span>Status Risiko</span>
+                        <h2>Belum dianalisis</h2>
+                        <small>Menunggu analisis risiko</small>
+                        <small class="card-link">Lihat analisis →</small>
+                    </a>
+
+                </section>
+
+
+                <!-- DASHBOARD GRID -->
+                <section class="dashboard-grid">
+
+                    <!-- PETA RISIKO -->
+                    <a href="#peta-risiko" class="panel dashboard-map-link">
+
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Peta Risiko Interaksi</h3>
+                                <p>Visualisasi wilayah pengamatan</p>
+                            </div>
+
+                            <span class="panel-label">MAP VIEW</span>
+                        </div>
+
+                        <div class="map-placeholder">
+                            <span>⌖</span>
+                            <h3>Peta Digital TURTLE-SAFE</h3>
+                            <p>
+                                Peta akan ditampilkan pada tahap berikutnya.
+                            </p>
+                            <small class="card-link">Buka peta interaktif →</small>
+                        </div>
+
+                    </a>
+
+
+                    <!-- INFORMASI SISTEM -->
+                    <div class="panel">
+
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Informasi Sistem</h3>
+                                <p>Status pengembangan platform</p>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <span class="activity-dot"></span>
+                            <div>
+                                <strong>Dashboard</strong>
+                                <p>Kerangka dashboard telah dibuat.</p>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <span class="activity-dot"></span>
+                            <div>
+                                <strong>Data Pengamatan</strong>
+                                <p>Menunggu pengembangan modul data.</p>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <span class="activity-dot"></span>
+                            <div>
+                                <strong>Analisis Risiko</strong>
+                                <p>Menunggu integrasi data.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- HALAMAN 2: PETA RISIKO -->
+          
+<section class="page-section" id="page-peta-risiko">
+
+    <h1>Peta Wilayah Pengamatan</h1>
+    <p>
+        Visualisasi peta dasar Kawasan Konservasi Pulau Pieh
+        dan Laut Sekitarnya, Sumatera Barat.
+    </p>
+
+    <!-- INFORMASI KAWASAN -->
+    <div class="stats-grid map-info-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">🌊</div>
+            <span>Nama Kawasan</span>
+            <h2>Pulau Pieh</h2>
+            <small>Kawasan Konservasi Nasional</small>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">📍</div>
+            <span>Wilayah</span>
+            <h2>Sumatera Barat</h2>
+            <small>Provinsi Sumatera Barat</small>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🗺️</div>
+            <span>Status Peta</span>
+            <h2>Peta Dasar</h2>
+            <small>Belum terintegrasi data pengamatan</small>
+        </div>
+
+    </div>
+
+    <!-- PETA -->
+    <div class="panel map-main-panel">
+
+        <div class="panel-heading">
+            <div>
+                <h3>Peta Kawasan Pengamatan</h3>
+                <p>Kawasan Konservasi Pulau Pieh dan Laut Sekitarnya</p>
+            </div>
+
+            <span class="panel-label">BASE MAP</span>
+        </div>
+
+        <div id="riskMap"></div>
+
+        <div class="map-footer-info">
+            <span>🌐 Sumber peta: OpenStreetMap</span>
+            <span>Data pengamatan belum tersedia</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+            <!-- HALAMAN 3: DATA PENYU -->
+            <section class="page-section" id="page-data-penyu">
+
+                <h1>Data Kemunculan Penyu</h1>
+                <p>
+                    Pencatatan informasi kemunculan penyu
+                    di wilayah pengamatan.
+                </p>
+
+                <div class="panel">
+                    <h3>Database Kemunculan Penyu</h3>
+                    <p>
+                        Data tanggal, lokasi, jenis penyu, jumlah individu,
+                        dan kondisi pengamatan akan ditampilkan di sini.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN 4: DATA PERIKANAN -->
+            <section class="page-section" id="page-data-perikanan">
+
+                <h1>Data Aktivitas Perikanan</h1>
+                <p>
+                    Pencatatan aktivitas perikanan di wilayah pengamatan.
+                </p>
+
+                <div class="panel">
+                    <h3>Database Aktivitas Perikanan</h3>
+                    <p>
+                        Data lokasi, waktu, jenis alat tangkap,
+                        dan aktivitas perikanan akan ditampilkan di sini.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN 5: ANALISIS -->
+            <section class="page-section" id="page-analisis">
+
+                <h1>Analisis Risiko</h1>
+                <p>
+                    Pengolahan data untuk mengidentifikasi potensi
+                    interaksi penyu dan aktivitas perikanan.
+                </p>
+
+                <div class="panel">
+                    <h3>Hasil Analisis</h3>
+                    <p>
+                        Hasil analisis akan ditampilkan setelah
+                        data pengamatan tersedia.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN 6: PERINGATAN -->
+            <section class="page-section" id="page-peringatan">
+
+                <h1>Informasi dan Peringatan Risiko</h1>
+                <p>
+                    Informasi potensi risiko interaksi berdasarkan
+                    hasil analisis.
+                </p>
+
+                <div class="panel">
+                    <h3>Status Peringatan</h3>
+                    <p>Belum ada hasil analisis risiko.</p>
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN 7: EDUKASI -->
+            <section class="page-section" id="page-edukasi">
+
+                <h1>Edukasi Konservasi</h1>
+                <p>
+                    Informasi mengenai perlindungan penyu
+                    dan konservasi ekosistem laut.
+                </p>
+
+                <div class="panel">
+                    <h3>Mengenal Konservasi Penyu</h3>
+                    <p>
+                        Materi edukasi konservasi akan dikembangkan
+                        di halaman ini.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- HALAMAN 8: TENTANG -->
+            <section class="page-section" id="page-tentang">
+
+                <h1>Tentang dan Laporan</h1>
+                <p>Informasi mengenai sistem TURTLE-SAFE.</p>
+
+                <div class="panel">
+                    <h3>Tentang TURTLE-SAFE</h3>
+                    <p>
+                        TURTLE-SAFE merupakan sistem informasi
+                        pemetaan risiko interaksi penyu
+                        dengan aktivitas perikanan.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="main-footer">
+                TURTLE-SAFE © 2026 | Ocean Conservation System
+            </footer>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
