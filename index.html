@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -9,9 +8,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
-<!-- Layar Login TURTLE-SAFE -->
-<div id="login-overlay" class="login-overlay">
+
+<!-- Layar Login TURTLE-SAFE (Tersembunyi secara default) -->
+<div id="login-overlay" class="login-overlay" style="display: none;">
     <div class="login-box">
+        <button type="button" class="btn-close-modal" onclick="tutupLogin()">&times;</button>
         <div class="login-header">
             <h2>🐢 TURTLE-SAFE</h2>
             <p>Akses Sistem Pemantauan & Konservasi</p>
@@ -30,7 +31,6 @@
         </form>
     </div>
 </div>
-<button onclick="logout()" class="btn-logout">Keluar</button>
 
 <div class="app-container">
 
@@ -127,11 +127,26 @@
 
                 <button class="nav-icon" aria-label="Notifikasi">♧</button>
 
-                <div class="profile">
-                    <div class="profile-avatar">TS</div>
-                    <div class="profile-info">
-                        <strong>Administrator</strong>
-                        <span>System User</span>
+                <!-- AREA LOGIN & PROFIL (TS / Administrator) -->
+                <div class="profile-menu-container">
+                    <!-- Tombol Login (Tampil saat belum login) -->
+                    <button id="btn-open-login" class="btn-header-login" onclick="bukaLogin()">
+                        Login Admin
+                    </button>
+
+                    <!-- Logo TS & Dropdown (Tampil setelah berhasil login) -->
+                    <div id="user-profile-wrapper" class="user-profile-wrapper" style="display: none;" onclick="toggleProfileDropdown()">
+                        <div class="profile-avatar">TS</div>
+                        <div class="profile-info">
+                            <strong>Administrator</strong>
+                            <span>System User ▾</span>
+                        </div>
+                        
+                        <!-- Menu Dropdown Logout -->
+                        <div id="profile-dropdown" class="profile-dropdown">
+                            <div class="dropdown-header">Status: Aktif</div>
+                            <button type="button" onclick="logout()" class="dropdown-logout">🚪 Keluar (Logout)</button>
+                        </div>
                     </div>
                 </div>
 
@@ -268,64 +283,62 @@
 
 
             <!-- HALAMAN 2: PETA RISIKO -->
-          
-<section class="page-section" id="page-peta-risiko">
+            <section class="page-section" id="page-peta-risiko">
 
-    <h1>Peta Wilayah Pengamatan</h1>
-    <p>
-        Visualisasi peta dasar Kawasan Konservasi Pulau Pieh
-        dan Laut Sekitarnya, Sumatera Barat.
-    </p>
+                <h1>Peta Wilayah Pengamatan</h1>
+                <p>
+                    Visualisasi peta dasar Kawasan Konservasi Pulau Pieh
+                    dan Laut Sekitarnya, Sumatera Barat.
+                </p>
 
-    <!-- INFORMASI KAWASAN -->
-    <div class="stats-grid map-info-grid">
+                <!-- INFORMASI KAWASAN -->
+                <div class="stats-grid map-info-grid">
 
-        <div class="stat-card">
-            <div class="stat-icon">🌊</div>
-            <span>Nama Kawasan</span>
-            <h2>Pulau Pieh</h2>
-            <small>Kawasan Konservasi Nasional</small>
-        </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🌊</div>
+                        <span>Nama Kawasan</span>
+                        <h2>Pulau Pieh</h2>
+                        <small>Kawasan Konservasi Nasional</small>
+                    </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">📍</div>
-            <span>Wilayah</span>
-            <h2>Sumatera Barat</h2>
-            <small>Provinsi Sumatera Barat</small>
-        </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📍</div>
+                        <span>Wilayah</span>
+                        <h2>Sumatera Barat</h2>
+                        <small>Provinsi Sumatera Barat</small>
+                    </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">🗺️</div>
-            <span>Status Peta</span>
-            <h2>Peta Dasar</h2>
-            <small>Belum terintegrasi data pengamatan</small>
-        </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🗺️</div>
+                        <span>Status Peta</span>
+                        <h2>Peta Dasar</h2>
+                        <small>Belum terintegrasi data pengamatan</small>
+                    </div>
 
-    </div>
+                </div>
 
-    <!-- PETA -->
-    <div class="panel map-main-panel">
+                <!-- PETA -->
+                <div class="panel map-main-panel">
 
-        <div class="panel-heading">
-            <div>
-                <h3>Peta Kawasan Pengamatan</h3>
-                <p>Kawasan Konservasi Pulau Pieh dan Laut Sekitarnya</p>
-            </div>
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Peta Kawasan Pengamatan</h3>
+                            <p>Kawasan Konservasi Pulau Pieh dan Laut Sekitarnya</p>
+                        </div>
 
-            <span class="panel-label">BASE MAP</span>
-        </div>
+                        <span class="panel-label">BASE MAP</span>
+                    </div>
 
-        <div id="riskMap"></div>
+                    <div id="riskMap"></div>
 
-        <div class="map-footer-info">
-            <span>🌐 Sumber peta: OpenStreetMap</span>
-            <span>Data pengamatan belum tersedia</span>
-        </div>
+                    <div class="map-footer-info">
+                        <span>🌐 Sumber peta: OpenStreetMap</span>
+                        <span>Data pengamatan belum tersedia</span>
+                    </div>
 
-    </div>
+                </div>
 
-</section>
-
+            </section>
 
 
             <!-- HALAMAN 3: DATA PENYU -->

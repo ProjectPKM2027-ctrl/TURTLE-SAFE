@@ -203,3 +203,84 @@ function logout() {
     sessionStorage.removeItem("isLoggedIn");
     location.reload();
 }
+// ==========================================
+// SISTEM LOGIN OPSIONAL & MENU PROFIL
+// ==========================================
+const AKUN_VALID = {
+    username: "admin",
+    password: "turtlesafe26"
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+    perbaruiTampilanStatusLogin();
+
+    const loginForm = document.getElementById("login-form");
+    const errorMsg = document.getElementById("login-error");
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+            const userInput = document.getElementById("username").value.trim();
+            const passInput = document.getElementById("password").value.trim();
+
+            if (userInput === AKUN_VALID.username && passInput === AKUN_VALID.password) {
+                sessionStorage.setItem("isLoggedIn", "true");
+                errorMsg.textContent = "";
+                loginForm.reset();
+                tutupLogin();
+                perbaruiTampilanStatusLogin();
+            } else {
+                errorMsg.textContent = "Username atau password salah!";
+            }
+        });
+    }
+
+    // Menutup dropdown profil jika pengguna mengklik area lain di luar profil
+    window.addEventListener("click", function (e) {
+        const wrapper = document.getElementById("user-profile-wrapper");
+        const dropdown = document.getElementById("profile-dropdown");
+        if (wrapper && dropdown && !wrapper.contains(e.target)) {
+            dropdown.classList.remove("show");
+        }
+    });
+});
+
+function bukaLogin() {
+    document.getElementById("login-overlay").style.display = "flex";
+}
+
+function tutupLogin() {
+    document.getElementById("login-overlay").style.display = "none";
+    document.getElementById("login-error").textContent = "";
+}
+
+function toggleProfileDropdown() {
+    const dropdown = document.getElementById("profile-dropdown");
+    if (dropdown) {
+        dropdown.classList.toggle("show");
+    }
+}
+
+function perbaruiTampilanStatusLogin() {
+    const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+    const btnLogin = document.getElementById("btn-open-login");
+    const profileWrapper = document.getElementById("user-profile-wrapper");
+
+    if (btnLogin && profileWrapper) {
+        if (isLoggedIn) {
+            btnLogin.style.display = "none";
+            profileWrapper.style.display = "flex";
+        } else {
+            btnLogin.style.display = "inline-block";
+            profileWrapper.style.display = "none";
+        }
+    }
+}
+
+function logout() {
+    sessionStorage.removeItem("isLoggedIn");
+    const dropdown = document.getElementById("profile-dropdown");
+    if (dropdown) dropdown.classList.remove("show");
+    perbaruiTampilanStatusLogin();
+}
