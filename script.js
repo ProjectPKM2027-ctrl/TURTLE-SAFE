@@ -161,3 +161,45 @@ function initializeRiskMap() {
         riskMap.invalidateSize();
     }, 300);
 }
+// ==========================================
+// SISTEM LOGIN SEDERHANA TURTLE-SAFE
+// ==========================================
+const AKUN_VALID = {
+    username: "admin",       // Ganti username sesuai keinginanmu
+    password: "turtlesafe26" // Ganti password sesuai keinginanmu
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+    const loginOverlay = document.getElementById("login-overlay");
+    const loginForm = document.getElementById("login-form");
+    const errorMsg = document.getElementById("login-error");
+
+    // Cek apakah user sudah login di sesi browser ini
+    if (sessionStorage.getItem("isLoggedIn") === "true") {
+        loginOverlay.style.display = "none";
+    }
+
+    // Saat form login disubmit
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+            const userInput = document.getElementById("username").value.trim();
+            const passInput = document.getElementById("password").value.trim();
+
+            if (userInput === AKUN_VALID.username && passInput === AKUN_VALID.password) {
+                sessionStorage.setItem("isLoggedIn", "true");
+                loginOverlay.style.display = "none";
+                errorMsg.textContent = "";
+            } else {
+                errorMsg.textContent = "Username atau password salah!";
+            }
+        });
+    }
+});
+
+// Fungsi untuk keluar (Logout)
+function logout() {
+    sessionStorage.removeItem("isLoggedIn");
+    location.reload();
+}
