@@ -1064,3 +1064,45 @@ body {
 .dropdown-logout:hover {
     background-color: #fff2f1;
 }
+
+/* ==========================================
+   TURTLE-SAFE - PENYESUAIAN FUNGSIONAL
+   ========================================== */
+.profile-menu-container { position: relative; }
+.user-profile-wrapper { cursor: pointer; }
+.dropdown-logout { display: block; }
+
+/* Pastikan peta memiliki ruang render yang konsisten. */
+#riskMap {
+    width: 100%;
+    height: 500px;
+    min-height: 500px;
+    display: block;
+    position: relative;
+    border-radius: 12px;
+    background: #eaf2f3;
+    z-index: 1;
+}
+
+/* Sidebar mobile berada di atas konten dan dapat dibuka dengan tombol menu. */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 270px;
+        transform: translateX(-100%);
+        box-shadow: 8px 0 24px rgba(0, 0, 0, 0.18);
+    }
+    .sidebar.mobile-open { transform: translateX(0); }
+    .sidebar.collapsed { width: 270px; }
+    .main-area, .main-area.expanded { margin-left: 0; }
+    #riskMap { height: 420px; min-height: 420px; }
+}
+
+@media (max-width: 480px) {
+    #riskMap { height: 360px; min-height: 360px; }
+    .floating-nav { gap: 8px; }
+    .nav-actions { gap: 8px; }
+}
